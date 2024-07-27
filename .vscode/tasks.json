@@ -18,9 +18,9 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
             }
         },
+
         {
             "label": "Cargo Build (release)",
             "type": "process",
@@ -31,6 +31,15 @@
             ],
             "group": "build"
         },
+
+        {
+            "label": "Flash Firmware",
+            "type": "shell",
+            "command": "openocd -f ${workspaceFolder}/openocd.cfg -c \"program target/thumbv7em-none-eabihf/rust-embedded-demo preverify verify reset exit\"",
+            "dependsOn": ["Cargo Build (debug)"],
+            "group": "build"
+        },
+
         {
             "label": "Cargo Build Examples (debug)",
             "type": "process",
